@@ -1,9 +1,9 @@
 <?php
 
-$host = 'db';
-$dbUsername = 'root';
-$dbPassword = 'safireen456';
-$dbName = 'web01';
+$host = '';
+$dbUsername = '';
+$dbPassword = '';
+$dbName = '';
 
 $conn = new mysqli($host, $dbUsername, $dbPassword, $dbName);
 $output = "PLEASE ENTER USERNAME AND PASSWORD .";
