@@ -1,37 +1,24 @@
-
-version: '3.1'
-
 services:
-
-  php-apache-environment:
-    container_name: php-apache
+  web:
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: ./web
+    volumes:
+      - ./web:/var/www/html
+    ports:
+      - "8080:80"
     depends_on:
       - db
-    volumes:
-      - .:/var/www/html/
-    ports:
-      - 80:80
 
   db:
-    image: mariadb:10.6
-    restart: always
+    image: mysql:5.7
     environment:
-      - MYSQL_DATABASE=
-      - MYSQL_USER=
-      - MYSQL_PASSWORD=
-      - MYSQL_ROOT_PASSWORD=
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
 
-  phpmyadmin:
-    image: phpmyadmin
-    restart: always
-    links:
-      - db
-    depends_on:
-      - db
-    ports:
-      - 2222:80
-    environment:
-      - PMA_ARBITRARY=1
+volumes:
+  db_data:

@@ -1,11 +1,6 @@
 <?php
 
-$host = '';
-$dbUsername = '';
-$dbPassword = '';
-$dbName = '';
-
-$conn = new mysqli($host, $dbUsername, $dbPassword, $dbName);
+$conn = new mysqli('db', 'admin', 'admin', 'test');
 $output = "PLEASE ENTER USERNAME AND PASSWORD .";
 
 if ($conn->connect_error) {
